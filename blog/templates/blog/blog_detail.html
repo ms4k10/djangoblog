@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+            <div class="post-preview">
+                <a href="#">
+                    <h3 class="post-title">
+                        {{ object.subject }}
+                    </h3>
+                    <h4 class="post-meta">
+                        {{ object.content }}
+                    </h4>
+                </a>
+                    <p class="post-meta">{{ object.postdate }}</p>
+                {% if user.is_authenticated %}
+                <a href="{% url 'update' object.id %}" class="btn btn-primary">EDIT</a>
+                <a href="{% url 'delete' object.id %}" class="btn btn-danger">DELETE</a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

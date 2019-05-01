@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block body %}
+
+    {% if user.is_authenticated %}
+    <p><a href="{% url 'create' %}" class="btn btn-primary">New</a></p>
+    {% endif %}
+
+    <div class="row">
+        <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+            {% for obj in object_list %}
+            <div class="post-preview">
+                <a href="{% url 'detail' obj.id %}">
+                    <h3 class="post-title">
+                        {{ obj.subject }}
+                    </h3>
+                    <h4 class="post-meta">
+                        {{ obj.content }}
+                    </h4>
+                </a>
+                    <p class="post-meta">{{ obj.postdate }}</p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <nav aria-label="Page navigation example">
+        <ul class="pagination">
+            {% if page_obj.has_previous %}
+            <li>
+                <a href="?page={{page_obj.previous_page_number}}" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+            </li>
+            {% endif %}
+
+            {% for page in paginator.page_range %}
+            <li><a href="?page={{ page }}">{{ page }}</a></li>
+            {% endfor %}
+
+            {% if page_obj.has_next %}
+            <li>
+                <a href="?page={{page_obj.next_page_number}}" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+            </li>
+            {% endif %}
+        </ul>
+    </nav>
+
+{% endblock %}
