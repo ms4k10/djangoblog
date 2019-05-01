@@ -77,7 +77,7 @@ WSGI_APPLICATION = 'cleanblog.wsgi.application'
 import dj_databese_url
 
 DATABASES = {
-    'default': dj_databese_url.config(),
+    'default': dj_database_url.config(),
 }
 
 # Password validation
